@@ -1,8 +1,7 @@
-let currentPlayer = "Y";
+let currentPlayer = "O";
 
 import { CheckWinner } from "./Helpers/Winning";
 import DisplayText, { Change } from "./Helpers/DisplayText";
-
 
 // inintial value to add later string
 const arrayAdd = ["", "", "", "", "", "", "", "", ""];
@@ -21,6 +20,7 @@ export function Layout() {
       ))}
       <button
         id="restart"
+        className="btn btn-primary m-2"
         onClick={() => {
           arrayAdd.fill("");
           document.querySelectorAll(".cell")!.forEach((item) => {
@@ -29,6 +29,7 @@ export function Layout() {
           });
           currentPlayer = "O";
           DisplayText("#win", "");
+          document.querySelector("#win")!.classList.remove("btn-warning");
         }}
       >
         restart
@@ -44,10 +45,9 @@ const handleClick = (i: number) => {
   if (CheckWinner(arrayAdd)) {
     return;
   }
-  DisplayText("#turn", currentPlayer);
+  DisplayText("#turn", `${currentPlayer} turn`);
   currentPlayer = Change(currentPlayer);
   DisplayText(`#click${i}`, currentPlayer);
   arrayAdd[i] = currentPlayer; //put value string in empty string
   CheckWinner(arrayAdd);
-  
 };

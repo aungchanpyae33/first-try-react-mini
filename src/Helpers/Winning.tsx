@@ -13,7 +13,6 @@ const Winning = [
 let isWin: boolean;
 let winner: string;
 let cellWin: Array<number>;
-
 export function CheckWinner(array: Array<string>) {
   for (let i = 0; i < Winning.length; i++) {
     const a = array[Winning[i][0]];
@@ -31,8 +30,9 @@ export function CheckWinner(array: Array<string>) {
   }
   if (isWin) {
     isWin = false;
-    DisplayText("#win", winner);
+    DisplayText("#win", `Winner is ${winner}`);
     chec();
+    document.querySelector("#win")!.classList.add("btn-warning");
     cellWin = [];
     return true;
   } else if (!array.includes("")) {
